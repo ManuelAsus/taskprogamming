@@ -17,6 +17,9 @@ import {
 export const usersCollectionRef = collection(db, "users");
 export const projectsCollectionRef = collection(db, "projects");
 export const tasksCollectionRef = collection(db, "tasks");
+export const usersCollection = usersCollectionRef;
+export const projectsCollection = projectsCollectionRef;
+export const tasksCollection = tasksCollectionRef;
 
 export async function loginUser(email, password) {
   const q = query(usersCollectionRef, where("email", "==", email), where("password", "==", password));
@@ -237,8 +240,8 @@ if (loginForm) {
         alert("Correo o contraseña incorrectos.");
         return;
       }
-      saveSession(user);
-      window.location.href = "dashboard.html";
+      pendingLogin = user;
+      await openCameraModal();
     } catch (error) {
       alert("Error al iniciar sesión: " + error.message);
     }
@@ -247,9 +250,85 @@ if (loginForm) {
 
 const showForgot = document.getElementById("showForgot");
 const forgotSection = document.getElementById("forgotSection");
+const cameraModal = document.getElementById("cameraModal");
+const cameraVideo = document.getElementById("cameraVideo");
+const capturePhotoButton = document.getElementById("capturePhotoButton");
+const closeCameraButton = document.getElementById("closeCameraButton");
+const cameraStatus = document.getElementById("cameraStatus");
+let loginMediaStream = null;
+let pendingLogin = null;
+
 if (showForgot && forgotSection) {
   showForgot.addEventListener("click", () => {
     forgotSection.classList.toggle("hidden");
+  });
+}
+
+async function openCameraModal() {
+  if (!cameraModal || !cameraVideo) {
+    window.location.href = "dashboard.html";
+    return;
+  }
+
+  cameraModal.classList.remove("hidden");
+  cameraStatus.textContent = "Cargando cámara...";
+
+  try {
+    loginMediaStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" } });
+    cameraVideo.srcObject = loginMediaStream;
+    await cameraVideo.play();
+    cameraStatus.textContent = "Ajusta tu rostro y presiona Capturar.";
+  } catch (error) {
+    cameraStatus.textContent = "No se pudo acceder a la cámara. Presiona Capturar para continuar sin foto.";
+    console.error(error);
+  }
+}
+
+function closeCameraModal() {
+  if (cameraModal) {
+    cameraModal.classList.add("hidden");
+  }
+  if (loginMediaStream) {
+    loginMediaStream.getTracks().forEach((track) => track.stop());
+    loginMediaStream = null;
+  }
+  if (cameraVideo) {
+    cameraVideo.pause();
+    cameraVideo.srcObject = null;
+  }
+}
+
+async function captureLoginPhoto() {
+  if (!pendingLogin) {
+    closeCameraModal();
+    return;
+  }
+
+  if (cameraVideo && cameraVideo.videoWidth > 0 && cameraVideo.videoHeight > 0) {
+    const canvas = document.createElement("canvas");
+    canvas.width = cameraVideo.videoWidth || 640;
+    canvas.height = cameraVideo.videoHeight || 480;
+    const ctx = canvas.getContext("2d");
+    ctx.drawImage(cameraVideo, 0, 0, canvas.width, canvas.height);
+    const imageData = canvas.toDataURL("image/png");
+    sessionStorage.setItem("taskprog_login_photo", imageData);
+  }
+
+  saveSession(pendingLogin);
+  pendingLogin = null;
+  closeCameraModal();
+  window.location.href = "dashboard.html";
+}
+
+if (capturePhotoButton) {
+  capturePhotoButton.addEventListener("click", async () => {
+    await captureLoginPhoto();
+  });
+}
+
+if (closeCameraButton) {
+  closeCameraButton.addEventListener("click", () => {
+    closeCameraModal();
   });
 }
 

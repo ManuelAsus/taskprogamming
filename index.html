@@ -23,6 +23,17 @@
         <button type="submit" class="primary">Entrar</button>
       </form>
       <button id="showForgot" class="secondary">Olvidé mi contraseña</button>
+      <div id="cameraModal" class="camera-modal hidden">
+        <div class="camera-modal-content">
+          <h2>Captura tu foto de inicio de sesión</h2>
+          <video id="cameraVideo" autoplay playsinline class="camera-video"></video>
+          <p id="cameraStatus">Permite el acceso a la cámara y presiona capturar.</p>
+          <div class="camera-actions">
+            <button id="capturePhotoButton" class="primary">Capturar foto</button>
+            <button id="closeCameraButton" class="secondary">Cancelar</button>
+          </div>
+        </div>
+      </div>
       <div id="forgotSection" class="hidden forgot-box">
         <h2>Recuperar contraseña</h2>
         <form id="forgotForm" action="https://formspree.io/f/xdarzeka" method="POST" class="stack">

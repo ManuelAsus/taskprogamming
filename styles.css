@@ -245,6 +245,40 @@ button.secondary:hover {
   color: #991b1b;
 }
 
+.camera-modal {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(15, 23, 42, 0.6);
+  z-index: 20;
+  padding: 1rem;
+}
+
+.camera-modal-content {
+  width: min(100%, 500px);
+  background: var(--surface);
+  border-radius: 24px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  display: grid;
+  gap: 1rem;
+}
+
+.camera-video {
+  width: 100%;
+  min-height: 320px;
+  border-radius: 18px;
+  background: #000;
+  object-fit: cover;
+}
+
+.camera-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
 @media (min-width: 640px) {
   .shell {
     width: min(100%, 720px);
