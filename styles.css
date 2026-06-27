@@ -245,12 +245,39 @@ button.secondary:hover {
   color: #991b1b;
 }
 
-@media (min-width: 900px) {
+@media (min-width: 768px) {
+  .shell {
+    width: min(100%, 720px);
+  }
+
   .dashboard-shell {
-    grid-template-columns: 300px 1fr;
+    grid-template-columns: 280px 1fr;
   }
 
   .dashboard-nav {
     flex-direction: column;
+  }
+}
+
+@media (min-width: 1024px) {
+  .shell {
+    width: min(100%, 920px);
+  }
+
+  .page {
+    padding: 2rem;
+  }
+
+  .dashboard-shell {
+    gap: 1.5rem;
+  }
+
+  .panel-card {
+    padding: 2rem;
+  }
+
+  .nav-button {
+    min-width: 200px;
+    padding: 1.1rem 1.25rem;
   }
 }
