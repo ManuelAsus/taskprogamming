@@ -198,12 +198,12 @@ export async function saveTaskComment(taskId, comment) {
 }
 
 export async function getProjects() {
-  const snapshot = await getDocs(query(projectsCollection, orderBy("createdAt", "desc")));
+  const snapshot = await getDocs(query(projectsCollectionRef, orderBy("createdAt", "desc")));
   return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 }
 
 export async function getTasks() {
-  const snapshot = await getDocs(query(tasksCollection, orderBy("createdAt", "desc")));
+  const snapshot = await getDocs(query(tasksCollectionRef, orderBy("createdAt", "desc")));
   return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 }
 
