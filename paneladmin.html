@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel Admin | TaskProgramming</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="page shell">
+    <div class="card wide-card">
+      <img src="LOGO/logo.png" alt="TaskProgramming" class="brand-logo">
+      <h1>Alta de usuario</h1>
+      <form id="adminCreateUserForm" class="stack">
+        <label>
+          Foto de perfil
+          <input type="file" id="photoFile" accept="image/*" required>
+        </label>
+        <label>
+          Nombre completo
+          <input type="text" id="fullName" placeholder="Nombre completo" required>
+        </label>
+        <label>
+          Correo electrónico
+          <input type="email" id="email" placeholder="usuario@ejemplo.com" required>
+        </label>
+        <label>
+          Contraseña
+          <input type="password" id="password" placeholder="Contraseña" required>
+        </label>
+        <label>
+          Fecha de nacimiento
+          <input type="date" id="birthDate" required>
+        </label>
+        <label>
+          Dirección
+          <textarea id="address" rows="3" placeholder="Dirección completa" required></textarea>
+        </label>
+        <label>
+          Documentación en PDF
+          <input type="file" id="documentFile" accept="application/pdf" required>
+        </label>
+        <button type="submit" class="primary">Crear usuario</button>
+      </form>
+      <div id="adminMessage" class="message"></div>
+      <p class="small"><a href="index.html">Regresar al login</a></p>
+    </div>
+  </main>
+  <script type="module" src="admin.js"></script>
+</body>
+</html>

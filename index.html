@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iniciar sesión | TaskProgramming</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="page shell">
+    <img src="LOGO/logo.png" alt="TaskProgramming" class="brand-logo">
+    <div class="card">
+      <h1>Iniciar sesión</h1>
+      <form id="loginForm" class="stack">
+        <label>
+          Correo electrónico
+          <input type="email" id="loginEmail" placeholder="usuario@ejemplo.com" required>
+        </label>
+        <label>
+          Contraseña
+          <input type="password" id="loginPassword" placeholder="Contraseña" required>
+        </label>
+        <button type="submit" class="primary">Entrar</button>
+      </form>
+      <button id="showForgot" class="secondary">Olvidé mi contraseña</button>
+      <div id="forgotSection" class="hidden forgot-box">
+        <h2>Recuperar contraseña</h2>
+        <form id="forgotForm" action="https://formspree.io/f/xdarzeka" method="POST" class="stack">
+          <label>
+            Nombre completo
+            <input type="text" name="name" placeholder="Nombre completo" required>
+          </label>
+          <label>
+            Celular
+            <input type="tel" name="phone" placeholder="55 1234 5678" required>
+          </label>
+          <label>
+            Correo electrónico
+            <input type="email" name="email" placeholder="usuario@ejemplo.com" required>
+          </label>
+          <input type="hidden" name="_subject" value="Recuperación de contraseña TaskProgramming">
+          <button type="submit" class="primary">Enviar solicitud</button>
+        </form>
+      </div>
+      <p class="small">¿Eres administrador? <a href="paneladmin.html">Alta de usuario</a></p>
+    </div>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

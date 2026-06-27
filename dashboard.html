@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | TaskProgramming</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-sA+e2b66eu8lv0FIMQs8p0UKnZtK3w+v4X0rDZfPy2M=" crossorigin="" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-left">
+      <img src="LOGO/logo.png" alt="Logo" class="brand-logo-small">
+      <h1>TaskProgramming</h1>
+    </div>
+    <button id="logoutButton" class="secondary">Cerrar sesión</button>
+  </header>
+  <main class="dashboard-shell">
+    <nav class="dashboard-nav">
+      <button id="showProjects" class="nav-button active">Proyectos</button>
+      <button id="showActivities" class="nav-button">Actividades</button>
+    </nav>
+    <section id="projectsSection" class="dashboard-panel">
+      <div class="panel-card">
+        <h2>Crear proyecto</h2>
+        <form id="projectForm" class="stack">
+          <label>
+            Nombre del proyecto
+            <input type="text" id="projectName" required>
+          </label>
+          <label>
+            Nombre del cliente
+            <input type="text" id="projectClient" required>
+          </label>
+          <label>
+            Dirección de la empresa escrita
+            <input type="text" id="projectAddressText" required>
+          </label>
+          <label>
+            Dirección seleccionada en el mapa
+            <input type="text" id="projectAddressMap" placeholder="Haz clic en el mapa para seleccionar" readonly required>
+          </label>
+          <div id="projectMap" class="map"></div>
+          <label>
+            Foto del proyecto
+            <input type="file" id="projectPhoto" accept="image/*">
+          </label>
+          <label>
+            Costo del proyecto para el cliente
+            <input type="number" id="projectCost" min="0" step="0.01" required>
+          </label>
+          <label>
+            Tecnologías a usar
+            <input type="text" id="projectTech" placeholder="Ej. HTML, CSS, JavaScript" required>
+          </label>
+          <button type="submit" class="primary">Guardar proyecto</button>
+        </form>
+      </div>
+      <div class="panel-card" id="projectListCard">
+        <h2>Proyectos activos</h2>
+        <div id="projectList" class="list"></div>
+      </div>
+      <div class="panel-card">
+        <h2>Crear actividad</h2>
+        <form id="taskForm" class="stack">
+          <label>
+            Proyecto
+            <select id="taskProjectSelect" required>
+              <option value="" disabled selected>Selecciona un proyecto</option>
+            </select>
+          </label>
+          <label>
+            Asignar a
+            <select id="taskUserSelect" required>
+              <option value="" disabled selected>Selecciona un usuario</option>
+            </select>
+          </label>
+          <label>
+            Nombre de la actividad
+            <input type="text" id="taskName" placeholder="Nombre de la actividad" required>
+          </label>
+          <label>
+            Descripción de la actividad
+            <textarea id="taskDescription" rows="4" placeholder="Descripción" required></textarea>
+          </label>
+          <label>
+            URL de referencia (opcional)
+            <input type="url" id="taskUrl" placeholder="https://ejemplo.com">
+          </label>
+          <label>
+            Imágenes o archivos de referencia
+            <input type="file" id="taskReferenceFiles" accept="image/*,.html,.css,.js,.php,.txt" multiple>
+          </label>
+          <button type="submit" class="primary">Guardar actividad</button>
+        </form>
+      </div>
+    </section>
+
+    <section id="activitiesSection" class="dashboard-panel hidden">
+      <div class="panel-card">
+        <h2>Actividades</h2>
+        <div id="taskList" class="list"></div>
+      </div>
+    </section>
+  </main>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-o9N1jz0yVKAe2GmxBrLzWZqH7uk4iCibkue9Q2M6B4U=" crossorigin=""></script>
+  <script type="module" src="dashboard.js"></script>
+</body>
+</html>
