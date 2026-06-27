@@ -245,17 +245,69 @@ button.secondary:hover {
   color: #991b1b;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 640px) {
   .shell {
     width: min(100%, 720px);
   }
 
   .dashboard-shell {
-    grid-template-columns: 280px 1fr;
+    grid-template-columns: 1fr;
+    padding: 1.25rem;
+  }
+
+  .dashboard-nav {
+    justify-content: flex-start;
+  }
+}
+
+@media (min-width: 900px) {
+  .shell {
+    width: min(100%, 920px);
+  }
+
+  .dashboard-shell {
+    grid-template-columns: 260px 1fr;
+    gap: 1.5rem;
   }
 
   .dashboard-nav {
     flex-direction: column;
+    align-items: stretch;
+    margin-top: 0;
+  }
+
+  .dashboard-nav .nav-button {
+    width: 100%;
+  }
+
+  .dashboard-panel {
+    gap: 1.5rem;
+  }
+
+  .topbar {
+    padding: 1.25rem 1.5rem;
+  }
+
+  .panel-card {
+    padding: 2rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .shell {
+    width: min(100%, 1160px);
+  }
+
+  .dashboard-shell {
+    grid-template-columns: 240px 1fr;
+  }
+
+  .topbar {
+    padding: 1.5rem 2rem;
+  }
+
+  .panel-card {
+    padding: 2.25rem;
   }
 }
 
